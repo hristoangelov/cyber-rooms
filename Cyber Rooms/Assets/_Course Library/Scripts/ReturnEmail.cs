@@ -16,7 +16,7 @@ public class ReturnEmail : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         Debug.Log("Entered Awake");
     }
-    private void ObjectReleased(SelectExitEventArgs arg0)
+    public void ObjectReleased(SelectExitEventArgs arg0)
     {
         rb.Sleep();
         StartCoroutine(MoveToOriginPoint());
