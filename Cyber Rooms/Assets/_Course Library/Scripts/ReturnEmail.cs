@@ -14,13 +14,11 @@ public class ReturnEmail : MonoBehaviour
         _originPoint.position = this.transform.position;
         _originPoint.rotation = this.transform.rotation;
         rb = GetComponent<Rigidbody>();
-        Debug.Log("Entered Awake");
     }
     public void ObjectReleased(SelectExitEventArgs arg0)
     {
         rb.Sleep();
         StartCoroutine(MoveToOriginPoint());
-        Debug.Log("Entered");
     }
 
     private IEnumerator MoveToOriginPoint()

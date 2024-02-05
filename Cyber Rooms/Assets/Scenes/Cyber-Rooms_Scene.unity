@@ -481,7 +481,7 @@ GameObject:
   - component: {fileID: 53066918}
   - component: {fileID: 53066917}
   - component: {fileID: 53066916}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,7 +520,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.000015258789}
@@ -4389,9 +4389,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 274303674}
-  m_Layer: 8
+  - component: {fileID: 274303677}
+  m_Layer: 0
   m_Name: Legitimate Email
-  m_TagString: Untagged
+  m_TagString: Legitimate
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4413,6 +4414,27 @@ Transform:
   - {fileID: 1094490349}
   m_Father: {fileID: 1228238245}
   m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+--- !u!65 &274303677
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274303673}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.1623852, y: 1.3506908, z: 1.6687174}
+  m_Center: {x: -0.08119444, y: 0.03029728, z: -0.4926443}
 --- !u!1 &284145431
 GameObject:
   m_ObjectHideFlags: 0
@@ -4651,6 +4673,7 @@ GameObject:
   - component: {fileID: 310369130}
   - component: {fileID: 310369128}
   - component: {fileID: 310369131}
+  - component: {fileID: 310369132}
   m_Layer: 0
   m_Name: Email Object
   m_TagString: Untagged
@@ -4785,6 +4808,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 310369132}
+        m_TargetAssemblyTypeName: CheckAnswer, Assembly-CSharp
+        m_MethodName: CheckOnDrop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -4931,6 +4966,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+--- !u!114 &310369132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 310369126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41fa081fa6ca54a4598c18cc817dbca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPhishing: 1
 --- !u!1 &313403652
 GameObject:
   m_ObjectHideFlags: 0
@@ -11677,7 +11725,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1094490349}
   - component: {fileID: 1094490350}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: OK_icon_apart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11802,7 +11850,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0.000015258789}
@@ -17810,9 +17858,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1886528247}
+  - component: {fileID: 1886528248}
   m_Layer: 8
   m_Name: Phishing Email
-  m_TagString: Untagged
+  m_TagString: Phishing
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -17834,6 +17883,27 @@ Transform:
   - {fileID: 487324547}
   m_Father: {fileID: 1228238245}
   m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+--- !u!65 &1886528248
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1886528246}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2820711, y: 1.5245323, z: 1.8178067}
+  m_Center: {x: 0.14103544, y: 0.04660797, z: -0.40890372}
 --- !u!1 &1920589100
 GameObject:
   m_ObjectHideFlags: 0
