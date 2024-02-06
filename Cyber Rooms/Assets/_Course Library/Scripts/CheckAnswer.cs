@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class CheckAnswer : MonoBehaviour
 {
     public bool isPhishing;
+    public GameObject correctAnswerObject;
+    public GameObject wrongAnswerObject;
     protected bool isInside { get; set; }
     protected string answer { get; set; }
 
@@ -33,19 +35,15 @@ public class CheckAnswer : MonoBehaviour
         {
             if ((answer == "Phishing" && isPhishing) || (answer == "Legitimate" && !isPhishing))
             {
-                Debug.Log("Correctoooo");
+                correctAnswerObject.SetActive(true);
             }
             else if ((answer == "Phishing" && !isPhishing) || (answer == "Legitimate" && isPhishing))
             {
-                Debug.Log("WRONGOOO");
+                wrongAnswerObject.SetActive(true);
             }
             else{
                 return;
             }
-        }
-        else
-        {
-            Debug.Log("wasnt dropped inside");
         }
     }
 }
