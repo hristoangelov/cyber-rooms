@@ -14,12 +14,16 @@ public class CheckAnswer : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         isInside = true;
-        if (other.gameObject.tag == "Legitimate"){
+        if (other.gameObject.tag == "Legitimate")
+        {
             answer = "Legitimate";
-        }else if (other.gameObject.tag == "Phishing"){
+        }
+        else if (other.gameObject.tag == "Phishing")
+        {
             answer = "Phishing";
         }
-        else{
+        else
+        {
             answer = "Other";
         }
     }
@@ -41,9 +45,11 @@ public class CheckAnswer : MonoBehaviour
             {
                 wrongAnswerObject.SetActive(true);
             }
-            else{
+            else
+            {
                 return;
             }
+            GetComponent<XRBaseInteractable>().interactionLayers = InteractionLayerMask.GetMask("Nothing");
         }
     }
 }
