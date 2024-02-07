@@ -8,6 +8,7 @@ public class CheckAnswer : MonoBehaviour
     public bool isPhishing;
     public GameObject correctAnswerObject;
     public GameObject wrongAnswerObject;
+    public GameObject[] tooltips;
     protected bool isInside { get; set; }
     protected string answer { get; set; }
 
@@ -44,6 +45,10 @@ public class CheckAnswer : MonoBehaviour
             else if ((answer == "Phishing" && !isPhishing) || (answer == "Legitimate" && isPhishing))
             {
                 wrongAnswerObject.SetActive(true);
+                foreach (GameObject tooltip in tooltips)
+                {
+                    tooltip.SetActive(true);
+                }
             }
             else
             {
