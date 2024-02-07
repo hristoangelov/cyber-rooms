@@ -8,6 +8,7 @@ public class CheckAnswer : MonoBehaviour
     public bool isPhishing;
     public GameObject correctAnswerObject;
     public GameObject wrongAnswerObject;
+    public GameObject noAnswerObject;
     public GameObject[] tooltips;
     protected bool isInside { get; set; }
     protected string answer { get; set; }
@@ -40,10 +41,12 @@ public class CheckAnswer : MonoBehaviour
         {
             if ((answer == "Phishing" && isPhishing) || (answer == "Legitimate" && !isPhishing))
             {
+                noAnswerObject.SetActive(false);
                 correctAnswerObject.SetActive(true);
             }
             else if ((answer == "Phishing" && !isPhishing) || (answer == "Legitimate" && isPhishing))
             {
+                noAnswerObject.SetActive(false);
                 wrongAnswerObject.SetActive(true);
                 foreach (GameObject tooltip in tooltips)
                 {
@@ -55,6 +58,12 @@ public class CheckAnswer : MonoBehaviour
                 return;
             }
             GetComponent<XRBaseInteractable>().interactionLayers = InteractionLayerMask.GetMask("Nothing");
+        }
+    }
+
+    public void CheckOnMoveAway() {
+        if (!correctAnswerObject.activeInHierarchy && !wrongAnswerObject.activeInHierarchy){
+            noAnswerObject.SetActive(true);
         }
     }
 }
