@@ -10,6 +10,10 @@ public class CheckAnswer : MonoBehaviour
     public GameObject wrongAnswerObject;
     public GameObject noAnswerObject;
     public GameObject[] tooltips;
+    public GameObject ScoreTracker;
+    public AudioSource source;
+    public AudioClip wrongAnswerSound;
+    public AudioClip correctAnswerSound;
     protected bool isInside { get; set; }
     protected string answer { get; set; }
 
@@ -39,15 +43,20 @@ public class CheckAnswer : MonoBehaviour
     {
         if (isInside)
         {
+            //correct answer
             if ((answer == "Phishing" && isPhishing) || (answer == "Legitimate" && !isPhishing))
             {
                 noAnswerObject.SetActive(false);
                 correctAnswerObject.SetActive(true);
+                ScoreTracker.GetComponent<ScoreTracker>().correct += 1;
+                source.PlayOneShot(correctAnswerSound);
             }
+            //wrong answer
             else if ((answer == "Phishing" && !isPhishing) || (answer == "Legitimate" && isPhishing))
             {
                 noAnswerObject.SetActive(false);
                 wrongAnswerObject.SetActive(true);
+                source.PlayOneShot(wrongAnswerSound);
                 foreach (GameObject tooltip in tooltips)
                 {
                     tooltip.SetActive(true);
@@ -58,6 +67,7 @@ public class CheckAnswer : MonoBehaviour
                 return;
             }
             GetComponent<XRBaseInteractable>().interactionLayers = InteractionLayerMask.GetMask("Nothing");
+            ScoreTracker.GetComponent<ScoreTracker>().answered += 1;
         }
     }
 
