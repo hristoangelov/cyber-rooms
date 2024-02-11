@@ -5539,6 +5539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPhishing: 1
+  emailObject: {fileID: 310369126}
   correctAnswerObject: {fileID: 330503377}
   wrongAnswerObject: {fileID: 444668023}
   noAnswerObject: {fileID: 1133352221}
@@ -18606,6 +18607,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPhishing: 1
+  emailObject: {fileID: 1362278640}
   correctAnswerObject: {fileID: 957308859}
   wrongAnswerObject: {fileID: 1643777299}
   noAnswerObject: {fileID: 1690187185}

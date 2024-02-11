@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class CheckAnswer : MonoBehaviour
 {
     public bool isPhishing;
+    public GameObject emailObject;
     public GameObject correctAnswerObject;
     public GameObject wrongAnswerObject;
     public GameObject noAnswerObject;
@@ -71,8 +70,10 @@ public class CheckAnswer : MonoBehaviour
         }
     }
 
-    public void CheckOnMoveAway() {
-        if (!correctAnswerObject.activeInHierarchy && !wrongAnswerObject.activeInHierarchy){
+    public void CheckOnMoveAway()
+    {
+        if (!correctAnswerObject.activeInHierarchy && !wrongAnswerObject.activeInHierarchy && emailObject.activeInHierarchy)
+        {
             noAnswerObject.SetActive(true);
         }
     }
