@@ -11,6 +11,8 @@ TagManager:
   - button f2
   - button f1
   - button f6
+  - Legitimate
+  - Phishing
   layers:
   - Default
   - TransparentFX
@@ -20,7 +22,7 @@ TagManager:
   - UI
   - Left Hand Physics
   - Right Hand Physics
-  - 
+  - Answers
   - 
   - 
   - 
