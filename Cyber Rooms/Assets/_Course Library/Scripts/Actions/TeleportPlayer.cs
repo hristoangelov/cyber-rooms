@@ -1,9 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-/// <summary>
-/// Manually teleport the player to a specific anchor
-/// </summary>
 public class TeleportPlayer : MonoBehaviour
 {
     [Tooltip("The anchor the player is teleported to")]
@@ -14,6 +11,7 @@ public class TeleportPlayer : MonoBehaviour
 
     public void Teleport()
     {
+        // Manually teleport the player to a specific anchor
         if(anchor && provider)
         {
             TeleportRequest request = CreateRequest();
