@@ -24,8 +24,6 @@ namespace Keyboard
     {
         [Header("Keyboard Setup")]
         [SerializeField] private KeyChannel keyChannel;
-        [SerializeField] private Button spacebarButton;
-        [SerializeField] private Button speechButton;
         [SerializeField] private Button deleteButton;
         [SerializeField] private Button switchButton;
         [SerializeField] private string switchToNumbers = "Numbers";
@@ -39,7 +37,6 @@ namespace Keyboard
         [SerializeField] private GameObject specialCharactersKeyboard;
 
         [Header("Shift/Caps Lock Button")] 
-        [SerializeField] internal bool autoCapsAtStart = true;
         [SerializeField] private Button shiftButton;
         [SerializeField] private Image buttonImage;
         [SerializeField] private Sprite defaultSprite;
@@ -62,14 +59,12 @@ namespace Keyboard
         [SerializeField] private TMP_InputField outputField;
         [SerializeField] private Button enterButton;
         [SerializeField] private int maxCharacters = 15;
-        [SerializeField] private int minCharacters = 3;
 
         private ColorBlock shiftButtonColors;
         private bool isFirstKeyPress = true;
         private bool keyHasBeenPressed;
         private bool shiftActive;
         private bool capsLockActive;
-        private bool specialCharactersActive;
         private float lastShiftClickTime;
         private float shiftDoubleClickDelay = 0.5f;
 
@@ -80,14 +75,11 @@ namespace Keyboard
             shiftButtonColors = shiftButton.colors;
             
             CheckTextLength();
-
-            speechButton.interactable = false;
             
             numbersKeyboard.SetActive(false);
             specialCharactersKeyboard.SetActive(false);
             lettersKeyboard.SetActive(true);
 
-            spacebarButton.onClick.AddListener(OnSpacePress);
             deleteButton.onClick.AddListener(OnDeletePress);
             switchButton.onClick.AddListener(OnSwitchPress);
             shiftButton.onClick.AddListener(OnShiftPress);
@@ -99,15 +91,10 @@ namespace Keyboard
             switchNumberSpecialButton.gameObject.SetActive(false);
             numbersKeyboard.SetActive(false);
             specialCharactersKeyboard.SetActive(false);
-
-            if (!autoCapsAtStart) return;
-            ActivateShift();
-            UpdateShiftButtonAppearance();
         }
 
         private void OnDestroy()
         {
-            spacebarButton.onClick.RemoveListener(OnSpacePress);
             deleteButton.onClick.RemoveListener(OnDeletePress);
             switchButton.onClick.RemoveListener(OnSwitchPress);
             shiftButton.onClick.RemoveListener(OnShiftPress);
@@ -151,19 +138,6 @@ namespace Keyboard
             CheckTextLength();
         }
 
-        private void OnSpacePress()
-        {
-            int startPos = Mathf.Min(outputField.selectionAnchorPosition, outputField.selectionFocusPosition);
-            int endPos = Mathf.Max(outputField.selectionAnchorPosition, outputField.selectionFocusPosition);
-
-            outputField.text = outputField.text.Remove(startPos, endPos - startPos);
-            outputField.text = outputField.text.Insert(startPos, " ");
-
-            outputField.selectionAnchorPosition = outputField.selectionFocusPosition = startPos + 1;
-            
-            CheckTextLength();
-        }
-
         private void OnDeletePress()
         {
             if (string.IsNullOrEmpty(outputField.text)) return;
@@ -192,8 +166,7 @@ namespace Keyboard
             bool keysEnabled = currentLength < maxCharacters;
             keyChannel.RaiseKeysStateChangeEvent(keysEnabled);
 
-            // Disables or enables the enter button based on the text length
-            enterButton.interactable = currentLength >= minCharacters;
+            enterButton.interactable = true;
 
             // Always enable the delete button, regardless of the text length
             deleteButton.interactable = true;
@@ -260,14 +233,6 @@ namespace Keyboard
             }
 
             lastShiftClickTime = Time.time;
-            UpdateShiftButtonAppearance();
-            onKeyboardModeChanged?.Invoke();
-        }
-
-        private void ActivateShift()
-        {
-            if (!capsLockActive) shiftActive = true;
-
             UpdateShiftButtonAppearance();
             onKeyboardModeChanged?.Invoke();
         }
