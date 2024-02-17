@@ -28,33 +28,35 @@ namespace Keyboard
         [SerializeField] private Button switchButton;
         [SerializeField] private string switchToNumbers = "Numbers";
         [SerializeField] private string switchToLetter = "Letters";
+        [SerializeField] private GameObject validationMessageBackground;
+        [SerializeField] private TMP_Text validationMessage;
 
         private TextMeshProUGUI switchButtonText;
-        
+
         [Header("Keyboards")]
         [SerializeField] private GameObject lettersKeyboard;
         [SerializeField] private GameObject numbersKeyboard;
         [SerializeField] private GameObject specialCharactersKeyboard;
 
-        [Header("Shift/Caps Lock Button")] 
+        [Header("Shift/Caps Lock Button")]
         [SerializeField] private Button shiftButton;
         [SerializeField] private Image buttonImage;
         [SerializeField] private Sprite defaultSprite;
         [SerializeField] private Sprite activeSprite;
-        
+
         [Header("Switch Number/Special Button")]
         [SerializeField] private Button switchNumberSpecialButton;
         [SerializeField] private string numbersString = "Numbers";
         [SerializeField] private string specialString = "Special";
 
         private TextMeshProUGUI switchNumSpecButtonText;
-        
+
         [Header("Keyboard Button Colors")]
         [SerializeField] private Color normalColor = Color.black;
         [SerializeField] private Color highlightedColor = Color.yellow;
         [SerializeField] private Color pressedColor = Color.red;
         [SerializeField] private Color selectedColor = Color.blue;
-        
+
         [Header("Output Field Settings")]
         [SerializeField] private TMP_InputField outputField;
         [SerializeField] private Button enterButton;
@@ -67,27 +69,29 @@ namespace Keyboard
         private bool capsLockActive;
         private float lastShiftClickTime;
         private float shiftDoubleClickDelay = 0.5f;
+        private int passwordLevel = 0;
 
         public UnityEvent onKeyboardModeChanged;
 
         private void Awake()
         {
             shiftButtonColors = shiftButton.colors;
-            
+
             CheckTextLength();
-            
+
             numbersKeyboard.SetActive(false);
             specialCharactersKeyboard.SetActive(false);
             lettersKeyboard.SetActive(true);
 
             deleteButton.onClick.AddListener(OnDeletePress);
+            enterButton.onClick.AddListener(OnEnterPress);
             switchButton.onClick.AddListener(OnSwitchPress);
             shiftButton.onClick.AddListener(OnShiftPress);
             switchNumberSpecialButton.onClick.AddListener(SwitchBetweenNumbersAndSpecialCharacters);
             switchButtonText = switchButton.GetComponentInChildren<TextMeshProUGUI>();
             switchNumSpecButtonText = switchNumberSpecialButton.GetComponentInChildren<TextMeshProUGUI>();
             keyChannel.RaiseKeyColorsChangedEvent(normalColor, highlightedColor, pressedColor, selectedColor);
-            
+
             switchNumberSpecialButton.gameObject.SetActive(false);
             numbersKeyboard.SetActive(false);
             specialCharactersKeyboard.SetActive(false);
@@ -96,6 +100,7 @@ namespace Keyboard
         private void OnDestroy()
         {
             deleteButton.onClick.RemoveListener(OnDeletePress);
+            enterButton.onClick.RemoveListener(OnEnterPress);
             switchButton.onClick.RemoveListener(OnSwitchPress);
             shiftButton.onClick.RemoveListener(OnShiftPress);
             switchNumberSpecialButton.onClick.RemoveListener(SwitchBetweenNumbersAndSpecialCharacters);
@@ -134,7 +139,7 @@ namespace Keyboard
                 isFirstKeyPress = false;
                 keyChannel.onFirstKeyPress.Invoke();
             }
-    
+
             CheckTextLength();
         }
 
@@ -154,7 +159,7 @@ namespace Keyboard
                 outputField.text = outputField.text.Remove(startPos - 1, 1);
                 outputField.selectionAnchorPosition = outputField.selectionFocusPosition = startPos - 1;
             }
-            
+
             CheckTextLength();
         }
 
@@ -170,7 +175,7 @@ namespace Keyboard
 
             // Always enable the delete button, regardless of the text length
             deleteButton.interactable = true;
-            
+
             // Disable shift/caps lock if maximum text length is reached
             if (currentLength != maxCharacters) return;
             DeactivateShift();
@@ -180,6 +185,7 @@ namespace Keyboard
 
         private void OnSwitchPress()
         {
+            if (passwordLevel == 0 || passwordLevel == 1) return;
             if (lettersKeyboard.activeSelf)
             {
                 lettersKeyboard.SetActive(false);
@@ -209,6 +215,7 @@ namespace Keyboard
 
         private void OnShiftPress()
         {
+            if (passwordLevel == 0) return;
             if (capsLockActive)
             {
                 // If Caps Lock is active, deactivate it
@@ -216,25 +223,54 @@ namespace Keyboard
                 shiftActive = false;
             }
             else switch (shiftActive)
-            {
-                case true when !keyHasBeenPressed && Time.time - lastShiftClickTime < shiftDoubleClickDelay:
-                    // If Shift is active, a key has not been pressed, and Shift button was double clicked, activate Caps Lock
-                    capsLockActive = true;
-                    shiftActive = false;
-                    break;
-                case true when !keyHasBeenPressed:
-                    // If Shift is active, a key has not been pressed, deactivate Shift
-                    shiftActive = false;
-                    break;
-                case false:
-                    // If Shift is not active and Shift button was clicked once, activate Shift
-                    shiftActive = true;
-                    break;
-            }
+                {
+                    case true when !keyHasBeenPressed && Time.time - lastShiftClickTime < shiftDoubleClickDelay:
+                        // If Shift is active, a key has not been pressed, and Shift button was double clicked, activate Caps Lock
+                        capsLockActive = true;
+                        shiftActive = false;
+                        break;
+                    case true when !keyHasBeenPressed:
+                        // If Shift is active, a key has not been pressed, deactivate Shift
+                        shiftActive = false;
+                        break;
+                    case false:
+                        // If Shift is not active and Shift button was clicked once, activate Shift
+                        shiftActive = true;
+                        break;
+                }
 
             lastShiftClickTime = Time.time;
             UpdateShiftButtonAppearance();
             onKeyboardModeChanged?.Invoke();
+        }
+
+        public void OnEnterPress()
+        {
+            // depending on the level (how far in the game player is) show labels on right/wrong password
+            switch (passwordLevel)
+            {
+                case 0:
+                    if (outputField.text.Length >= 8 && outputField.text.Length <= 10)
+                    {
+                        validationMessageBackground.SetActive(true);
+                        validationMessage.SetText("All passwords with less than 14 characters are hacked in less than 2 hours.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
+                        validationMessage.color = new Color(0, 255, 0, 255);
+                    }
+                    else
+                    {
+                        validationMessageBackground.SetActive(true);
+                        validationMessage.SetText("Attackers are after your password!\nBetter enter between 8 and 10 characters.");
+                        validationMessage.color = new Color(255, 0, 0, 255);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void IncreaseLevel()
+        {
+            passwordLevel += 1;
         }
 
         public void DeactivateShift()
@@ -274,7 +310,7 @@ namespace Keyboard
                 shiftButtonColors.normalColor = highlightedColor;
                 buttonImage.sprite = activeSprite;
             }
-            else if(shiftActive)
+            else if (shiftActive)
             {
                 shiftButtonColors.normalColor = highlightedColor;
                 buttonImage.sprite = defaultSprite;
