@@ -284,6 +284,20 @@ namespace Keyboard
                         validationMessage.color = new Color(255, 0, 0, 255);
                     }
                     break;
+                case 2:
+                    validationMessageBackground.SetActive(true);
+                    if (outputField.text.Length >= 8 && outputField.text.Any(char.IsUpper) && outputField.text.Any(char.IsDigit))
+                    {
+                        validationMessage.SetText("Passwords under 14 characters without a special character are hacked in less than a week.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
+                        validationMessage.color = new Color(0, 255, 0, 255);
+                        RayThree.Play();
+                    }
+                    else
+                    {
+                        validationMessage.SetText("Attackers are after your password!\nBetter enter a digit.");
+                        validationMessage.color = new Color(255, 0, 0, 255);
+                    }
+                    break;
                 default:
                     break;
             }
