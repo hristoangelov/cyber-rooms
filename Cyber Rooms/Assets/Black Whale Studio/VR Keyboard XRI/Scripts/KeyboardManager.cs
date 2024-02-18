@@ -66,6 +66,7 @@ namespace Keyboard
         [Header("Particle Systems manager")]
         [SerializeField] private ParticleSystem RayTwo;
         [SerializeField] private ParticleSystem RayThree;
+        [SerializeField] private ParticleSystem RayFour;
 
         private ColorBlock shiftButtonColors;
         private bool isFirstKeyPress = true;
@@ -290,11 +291,25 @@ namespace Keyboard
                     {
                         validationMessage.SetText("Passwords under 14 characters without a special character are hacked in less than a week.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
                         validationMessage.color = new Color(0, 255, 0, 255);
-                        RayThree.Play();
+                        RayFour.Play();
                     }
                     else
                     {
                         validationMessage.SetText("Attackers are after your password!\nBetter enter a digit.");
+                        validationMessage.color = new Color(255, 0, 0, 255);
+                    }
+                    break;
+                case 3:
+                    validationMessageBackground.SetActive(true);
+                    if (outputField.text.Length >= 8 && outputField.text.Any(char.IsUpper) && outputField.text.Any(char.IsDigit) && outputField.text.Any(char.IsSymbol))
+                    {
+                        validationMessage.SetText("Great job! Attackers will need 300 years to hack this password.\nThat's <i>almost</i> uneatable!.\nGo to the next lit mat to see some further tips.");
+                        validationMessage.color = new Color(0, 255, 0, 255);
+                        // RayFour.Play();
+                    }
+                    else
+                    {
+                        validationMessage.SetText("Attackers are after your password!\nBetter enter a special character.");
                         validationMessage.color = new Color(255, 0, 0, 255);
                     }
                     break;
