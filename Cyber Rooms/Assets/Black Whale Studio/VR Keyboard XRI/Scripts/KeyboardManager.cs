@@ -31,6 +31,7 @@ namespace Keyboard
         [SerializeField] private string switchToLetter = "Letters";
         [SerializeField] private GameObject validationMessageBackground;
         [SerializeField] private TMP_Text validationMessage;
+        [SerializeField] private GameObject FAButton;
 
         private TextMeshProUGUI switchButtonText;
 
@@ -67,6 +68,7 @@ namespace Keyboard
         [SerializeField] private ParticleSystem RayTwo;
         [SerializeField] private ParticleSystem RayThree;
         [SerializeField] private ParticleSystem RayFour;
+        [SerializeField] private ParticleSystem RayFive;
 
         private ColorBlock shiftButtonColors;
         private bool isFirstKeyPress = true;
@@ -301,11 +303,11 @@ namespace Keyboard
                     break;
                 case 3:
                     validationMessageBackground.SetActive(true);
-                    if (outputField.text.Length >= 8 && outputField.text.Any(char.IsUpper) && outputField.text.Any(char.IsDigit) && outputField.text.Any(char.IsSymbol))
+                    if (outputField.text.Any(char.IsUpper) && outputField.text.Any(char.IsDigit) && outputField.text.Any(char.IsSymbol))
                     {
                         validationMessage.SetText("Great job! Attackers will need 300 years to hack this password.\nThat's <i>almost</i> uneatable!.\nGo to the next lit mat to see some further tips.");
                         validationMessage.color = new Color(0, 255, 0, 255);
-                        // RayFour.Play();
+                        RayFive.Play();
                     }
                     else
                     {
@@ -326,6 +328,12 @@ namespace Keyboard
         public void ResetValidationMessage()
         {
             validationMessageBackground.SetActive(false);
+        }
+
+        public void Show2FAButton()
+        {
+            if(passwordLevel==4)
+                FAButton.SetActive(true);
         }
 
         public void DeactivateShift()
