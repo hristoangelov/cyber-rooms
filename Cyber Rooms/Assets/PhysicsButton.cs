@@ -33,7 +33,7 @@ public class PhysicsButton : MonoBehaviour
         isPressed = false;
         validationMessageBackground.SetActive(true);
         validationMessage.SetText("Great job! The attackers just decided that if even possible, attacking your company will be too hard!\nYou are now prepared to defend both your personal and company's data.");
-        validationMessage.color = new Color(255, 0, 0, 255);
+        validationMessage.color = new Color(0, 255, 0, 255);
         onRelease.Invoke();
     }
 }
