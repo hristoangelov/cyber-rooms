@@ -138,7 +138,7 @@ namespace Keyboard
             int endPos = Mathf.Max(outputField.selectionAnchorPosition, outputField.selectionFocusPosition);
 
             outputField.text = outputField.text.Remove(startPos, endPos - startPos);
-            outputField.text = outputField.text.Insert(startPos, textToInsert);
+            outputField.text = outputField.text.Insert(Mathf.Max(startPos, outputField.text.Length), textToInsert);
 
             outputField.selectionAnchorPosition = outputField.selectionFocusPosition = startPos + textToInsert.Length;
 
@@ -155,6 +155,7 @@ namespace Keyboard
         {
             if (string.IsNullOrEmpty(outputField.text)) return;
             int startPos = Mathf.Min(outputField.selectionAnchorPosition, outputField.selectionFocusPosition);
+            startPos = Mathf.Max(startPos, outputField.text.Length);
             int endPos = Mathf.Max(outputField.selectionAnchorPosition, outputField.selectionFocusPosition);
 
             if (endPos > startPos)
