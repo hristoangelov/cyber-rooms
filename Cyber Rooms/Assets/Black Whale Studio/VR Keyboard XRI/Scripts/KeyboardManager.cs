@@ -263,7 +263,7 @@ namespace Keyboard
                     //if output by the user is correct
                     if (outputField.text.Length >= 8 && outputField.text.Length <= 10)
                     {
-                        validationMessage.SetText("All passwords with less than 14 characters are hacked in less than 2 hours.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
+                        validationMessage.SetText("All passwords with less than 14 characters are hacked in less than <color=red><i>2 hours.</i></color>\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
                         validationMessage.color = new Color(0, 255, 0, 255);
                         RayTwo.Play();
                     }
@@ -278,7 +278,7 @@ namespace Keyboard
                     validationMessageBackground.SetActive(true);
                     if (outputField.text.Length >= 8 && outputField.text.Any(char.IsUpper))
                     {
-                        validationMessage.SetText("Passwords under 14 characters with only upper and lowercase letter are hacked in less than a day.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
+                        validationMessage.SetText("Passwords under 14 characters with only upper and lowercase letter are hacked in less than <color=red><i>a day.</i></color>\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
                         validationMessage.color = new Color(0, 255, 0, 255);
                         RayThree.Play();
                     }
@@ -292,7 +292,7 @@ namespace Keyboard
                     validationMessageBackground.SetActive(true);
                     if (outputField.text.Length >= 8 && outputField.text.Any(char.IsUpper) && outputField.text.Any(char.IsDigit))
                     {
-                        validationMessage.SetText("Passwords under 14 characters without a special character are hacked in less than a week.\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
+                        validationMessage.SetText("Passwords under 14 characters without a special character are hacked in less than <color=red><i>a week.</i></color>\nLet's work on that and make attacker's life harder.\nGo to the next lit mat.");
                         validationMessage.color = new Color(0, 255, 0, 255);
                         RayFour.Play();
                     }
@@ -333,7 +333,7 @@ namespace Keyboard
 
         public void Show2FAButton()
         {
-            if(passwordLevel==4)
+            if (passwordLevel == 4)
                 FAButton.SetActive(true);
         }
 
