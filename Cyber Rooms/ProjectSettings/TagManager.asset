@@ -13,6 +13,7 @@ TagManager:
   - button f6
   - Legitimate
   - Phishing
+  - Grabbable
   layers:
   - Default
   - TransparentFX
