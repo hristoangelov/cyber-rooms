@@ -13,6 +13,13 @@ public class UpdateLeaderboard : MonoBehaviour
     [SerializeField] private GameObject usernamePrompt;
     [SerializeField] private TextMeshProUGUI[] topScores;
     [SerializeField] private TMP_Text leaderboardHeader;
+    
+    [Header("On Leaderboard Update")]
+    [SerializeField] private GameObject validationMessageBackground;
+    [SerializeField] private TMP_Text validationMessage;
+    [SerializeField] private GameObject keyboardObject;
+    [SerializeField] private GameObject leaderboardObject;
+    [SerializeField] private GameObject usernamePromptObject;
     private int timeWeight = 300;
     private int minimumScore = 20;
     public int position;
@@ -28,8 +35,19 @@ public class UpdateLeaderboard : MonoBehaviour
 
     public void GetCurrentLeaderboard()
     {
-        // need to uncheck the "Force Remove Internet" from Project Setting -> XR Plug-in Management -> Open XR to work on headset
-        StartCoroutine(GetLeaderboard());
+        if (usernamePrompt.GetComponent<KeyboardManager>().outputField.text == "")
+        {
+            validationMessageBackground.SetActive(true);
+            validationMessage.SetText("You need to enter your username first.");
+            validationMessage.color = new Color(255, 0, 0, 255);
+        }
+        else{
+            keyboardObject.SetActive(false);
+            leaderboardObject.SetActive(true);
+            usernamePromptObject.SetActive(false);
+            // need to uncheck the "Force Remove Internet" from Project Setting -> XR Plug-in Management -> Open XR to work on headset
+            StartCoroutine(GetLeaderboard());
+        }
     }
 
     IEnumerator GetLeaderboard()
