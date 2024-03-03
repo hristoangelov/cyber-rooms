@@ -60,7 +60,7 @@ namespace Keyboard
         [SerializeField] private Color selectedColor = Color.blue;
 
         [Header("Output Field Settings")]
-        [SerializeField] private TMP_InputField outputField;
+        [SerializeField] public TMP_InputField outputField;
         [SerializeField] private Button enterButton;
         [SerializeField] private int maxCharacters = 15;
 
@@ -352,6 +352,10 @@ namespace Keyboard
         public bool IsShiftActive() => shiftActive;
 
         public bool IsCapsLockActive() => capsLockActive;
+
+        public void ClearInputField(){
+            outputField.text = "";
+        }
 
         private void SwitchBetweenNumbersAndSpecialCharacters()
         {
