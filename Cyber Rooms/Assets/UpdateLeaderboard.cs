@@ -24,13 +24,13 @@ public class UpdateLeaderboard : MonoBehaviour
     private int minimumScore = 20;
     public int position;
 
-    private float CalculateFinalScore()
+    private int CalculateFinalScore()
     {
         //get phsihing score and the timer value
         float timeTaken = timer.GetComponent<Timer>().timer;
         int correctAnswers = phishingCorrectAnswers.GetComponent<ScoreTracker>().correct;
-        float finalScore = minimumScore + (correctAnswers + (timeWeight / timeTaken)) * 10;
-        return finalScore;
+        float finalScore = minimumScore + ((correctAnswers + (timeWeight / timeTaken)) * 10);
+        return (int)finalScore;
     }
 
     public void GetCurrentLeaderboard()
