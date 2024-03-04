@@ -12,7 +12,7 @@ public class Wait : MonoBehaviour
 
     IEnumerator waitForIntro()
     {
-        yield return new WaitForSeconds(11);
+        yield return new WaitForSeconds(76);
 
         SceneManager.LoadScene(1);
     }
