@@ -61,6 +61,9 @@ sysinfo.txt
 *.unitypackage
 *.app
 
+# videos that are too big
+*.mov
+
 # Crashlytics generated file
 crashlytics-build.properties
 
