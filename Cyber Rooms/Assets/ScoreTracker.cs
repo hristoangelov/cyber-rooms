@@ -10,7 +10,7 @@ public class ScoreTracker : MonoBehaviour
     public int correct = 0;
     public GameObject completedChapterObject;
     public TMP_Text completedChapterText;
-    private readonly float distance = 1.5f;
+    private readonly float distance = 1.25f;
     void Update()
     {
         //Updates text mesh component
@@ -30,11 +30,11 @@ public class ScoreTracker : MonoBehaviour
         completedChapterObject.transform.rotation = Camera.main.transform.rotation;
         if (correct == 1)
         {
-            completedChapterText.SetText("You answered " + correct.ToString() + " question correct out of 4. Press Next to go to the next challenge");
+            completedChapterText.SetText("You answered " + correct.ToString() + " out of 4 question correct. Press Next to go to the next challenge");
         }
         else
         {
-            completedChapterText.SetText("You answered " + correct.ToString() + " questions correct out of 4. Press Next to go to the next challenge");
+            completedChapterText.SetText("You answered " + correct.ToString() + " out of 4 questions correct. Press Next to go to the next challenge");
         }
         completedChapterObject.SetActive(true);
     }
