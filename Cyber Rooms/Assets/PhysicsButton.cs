@@ -7,8 +7,11 @@ public class PhysicsButton : MonoBehaviour
     [SerializeField] private GameObject button;
     [SerializeField] private GameObject validationMessageBackground;
     [SerializeField] private TMP_Text validationMessage;
+    [SerializeField] private ParticleSystem confetti;
     public UnityEvent onRelease;
     AudioSource sound;
+    public AudioSource confettiSound;
+    public AudioClip confettiClip;
 
     [Header("Leaderboard")]
     [SerializeField] private GameObject leaderboardPrompt;
@@ -42,8 +45,13 @@ public class PhysicsButton : MonoBehaviour
         validationMessage.SetText("Great job! The attackers just decided that if even possible, attacking your company will be too hard!\nYou are now prepared to defend both your personal and company's data.");
         validationMessage.color = new Color(0, 255, 0, 255);
 
+        // start confetti particles and sound
+        confetti.Play();
+        confettiSound.clip = confettiClip;
+        confettiSound.Play();
+
         leaderboardPrompt.SetActive(true);
-        //stop timer of the game
+        // stop timer of the game
         timer.GetComponent<Timer>().StopTimer();
         onRelease.Invoke();
     }
