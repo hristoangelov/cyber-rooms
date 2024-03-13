@@ -64,6 +64,8 @@ sysinfo.txt
 # videos that are too big
 *.mov
 *.mov.meta
+*.mp4
+*.mp4.meta
 
 # Crashlytics generated file
 crashlytics-build.properties
