@@ -13,8 +13,10 @@ public class CheckAnswer : MonoBehaviour
     public AudioSource source;
     public AudioClip wrongAnswerSound;
     public AudioClip correctAnswerSound;
+    public string numQuestion;
     protected bool isInside { get; set; }
     protected string answer { get; set; }
+    public CloudSaveScript onSaveScript;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -49,6 +51,8 @@ public class CheckAnswer : MonoBehaviour
                 correctAnswerObject.SetActive(true);
                 ScoreTracker.GetComponent<ScoreTracker>().correct += 1;
                 source.PlayOneShot(correctAnswerSound);
+                // save asnwer to cloud save
+                onSaveScript.SaveData(numQuestion, "Correct");
             }
             //wrong answer
             else if ((answer == "Phishing" && !isPhishing) || (answer == "Legitimate" && isPhishing))
@@ -56,6 +60,10 @@ public class CheckAnswer : MonoBehaviour
                 noAnswerObject.SetActive(false);
                 wrongAnswerObject.SetActive(true);
                 source.PlayOneShot(wrongAnswerSound);
+                // save asnwer to cloud save
+                onSaveScript.SaveData(numQuestion, "Wrong");
+
+                // show tooltips on wrong answer
                 foreach (GameObject tooltip in tooltips)
                 {
                     tooltip.SetActive(true);

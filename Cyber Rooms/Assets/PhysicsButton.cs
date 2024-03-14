@@ -12,6 +12,7 @@ public class PhysicsButton : MonoBehaviour
     AudioSource sound;
     public AudioSource confettiSound;
     public AudioClip confettiClip;
+    public CloudSaveScript onSaveScript;
 
     [Header("Leaderboard")]
     [SerializeField] private GameObject leaderboardPrompt;
@@ -53,6 +54,10 @@ public class PhysicsButton : MonoBehaviour
         leaderboardPrompt.SetActive(true);
         // stop timer of the game
         timer.GetComponent<Timer>().StopTimer();
+
+        // save total time to cloud save
+        float timeTaken = timer.GetComponent<Timer>().timer;
+        onSaveScript.SaveData("time_in_seconds", timeTaken.ToString());
         onRelease.Invoke();
     }
 }
