@@ -20801,7 +20801,7 @@ MonoBehaviour:
   source: {fileID: 310369133}
   wrongAnswerSound: {fileID: 8300000, guid: 702909a3a64b44e3c94df4c125fa2495, type: 3}
   correctAnswerSound: {fileID: 8300000, guid: a6e6cb127e7044a3eaa8772d8a314706, type: 3}
-  numQuestion: 1
+  numQuestion: q1
   onSaveScript: {fileID: 881441997}
 --- !u!82 &310369133
 AudioSource:
@@ -53551,7 +53551,7 @@ MonoBehaviour:
   source: {fileID: 1045905649}
   wrongAnswerSound: {fileID: 8300000, guid: 702909a3a64b44e3c94df4c125fa2495, type: 3}
   correctAnswerSound: {fileID: 8300000, guid: a6e6cb127e7044a3eaa8772d8a314706, type: 3}
-  numQuestion: 4
+  numQuestion: q4
   onSaveScript: {fileID: 881441997}
 --- !u!114 &1045905651
 MonoBehaviour:
@@ -65517,7 +65517,7 @@ MonoBehaviour:
   source: {fileID: 1362278642}
   wrongAnswerSound: {fileID: 8300000, guid: 702909a3a64b44e3c94df4c125fa2495, type: 3}
   correctAnswerSound: {fileID: 8300000, guid: a6e6cb127e7044a3eaa8772d8a314706, type: 3}
-  numQuestion: 2
+  numQuestion: q2
   onSaveScript: {fileID: 881441997}
 --- !u!114 &1362278644
 MonoBehaviour:
@@ -79530,7 +79530,7 @@ MonoBehaviour:
   source: {fileID: 1891051323}
   wrongAnswerSound: {fileID: 8300000, guid: 702909a3a64b44e3c94df4c125fa2495, type: 3}
   correctAnswerSound: {fileID: 8300000, guid: a6e6cb127e7044a3eaa8772d8a314706, type: 3}
-  numQuestion: 3
+  numQuestion: q3
   onSaveScript: {fileID: 881441997}
 --- !u!114 &1891051325
 MonoBehaviour:
