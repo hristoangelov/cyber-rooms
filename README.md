@@ -43,5 +43,7 @@ III. Press on the play button in the top corner of the unity window
 
 IV. Manual on how to control the player with mouse and keyboard can be found [here](https://docs.unity3d.com/Packages/com.unity.xr.interaction.toolkit@2.0/manual/xr-device-simulator.html)
 
+To enable leaderboard and data base saves, you should force remove internet permission. That can be done from Edit -> Project Settings -> click on the cog wheel next to Meta Quest Support -> untick Force Remove Internet Permission
+
 ## Usage
 Once the VR experience is launched, users can navigate through the virtual environment using the VR controllers or keyboard and mouse. A tutorial and various interactive scenarios and challenges related to security awareness will be present.
